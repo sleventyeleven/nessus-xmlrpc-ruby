@@ -43,7 +43,7 @@ Type ./nessus-cli.rb --help for command line options.
 ./nessus-cli.rb --user user --password pass --report 5329fae9-fb1d-0c67-a401-a0db12637c0d5bcd67900d34e00e --output report.xml
 ```
 ##nessus-xmlrpc.rb
-communicate with Nessus(4.2+) over XML RPC interface
+communicate with Nessus(5.1+) over XML RPC interface
 
 Simple example:
 ```ruby
