@@ -188,7 +188,7 @@ opt.each do |opt,arg|
                         end
                 when        '--wait'
                         if arg == ''
-                                wait = 5
+                                wait = 15
                         else
                                 wait = arg.to_i
                         end
@@ -307,13 +307,13 @@ case operation
                 unless output1 == ''
                         $stderr.print "[i] Output XML1 report to file: "+output1 if verbose > 0
                         content=n.report_file1_download(uid)        
-                        File.open(output, 'w') {|f| f.write(content) }        
+                        File.open(output1, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
-				unless outputh == ''
+                unless outputh == ''
                         $stderr.print "[i] Output html report to file: "+outputh if verbose > 0
-                        content=n.report_file1_download(uid)        
-                        File.open(output, 'w') {|f| f.write(content) }        
+                        content=n.report_file1_download(uid) 						
+                        File.open(outputh, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
                 if deletereport
@@ -323,8 +323,8 @@ case operation
                 end
         when "report"
                 uid=scanname
-                if (output == '') and (output1 == '')
-                        $stderr.print "[e] You want report, but specify filename with --output or output1\n"
+                if (output == '') and (output1 == '') and (outputh =='')
+                        $stderr.print "[e] You want report, but specify filename with --output or output1 or outputh\n"
                 end
                 unless output == ''
                         $stderr.print "[i] Output XML report to file: "+output if verbose > 0
@@ -335,13 +335,13 @@ case operation
                 unless output1 == ''
                         $stderr.print "[i] Output XML1 report to file: "+output1 if verbose > 0
                         content=n.report_file1_download(uid)        
-                        File.open(output, 'w') {|f| f.write(content) }        
+                        File.open(output1, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
-				unless outputh == ''
+                unless outputh == ''
                         $stderr.print "[i] Output html report to file: "+outputh if verbose > 0
                         content=n.report_file1_download(uid)        
-                        File.open(output, 'w') {|f| f.write(content) }        
+                        File.open(outputh, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
                 if deletereport
