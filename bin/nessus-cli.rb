@@ -312,7 +312,7 @@ case operation
                 end
                 unless outputh == ''
                         $stderr.print "[i] Output html report to file: "+outputh if verbose > 0
-                        content=n.report_file1_download(uid) 						
+                        content=n.report_fileh_download(uid) 						
                         File.open(outputh, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
@@ -340,7 +340,7 @@ case operation
                 end
                 unless outputh == ''
                         $stderr.print "[i] Output html report to file: "+outputh if verbose > 0
-                        content=n.report_file1_download(uid)        
+                        content=n.report_fileh_download(uid)        
                         File.open(outputh, 'w') {|f| f.write(content) }        
                         $stderr.print ": done\n" if verbose > 0
                 end
