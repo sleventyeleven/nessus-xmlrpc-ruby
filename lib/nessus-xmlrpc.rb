@@ -572,8 +572,9 @@ class NessusXMLRPCnokogiri < NessusXMLRPCrexml
         def report_fileh_download(id)
                 post= {"report" => id, "chapters" => "compliance;compliance_exec;vuln_by_host;vuln_by_plugin;vuln_hosts_summary", "format" => "html", "token" => @token }
                 http_content=nessus_http_request('chapter', post)
-				doc = Nokogiri::HTML(http_content)
-				file_name = doc."nokogiri parsing"
+				doc = Nokogiri::HTML::DocumentFragment.parse(http_content)
+				str = doc.at_css('meta[http-equiv="refresh"]')['content']
+				file_name = str[/\?fileName=(.*)/,1]
 				post2= { "fileName" => file_name }
 				file=nessus_http_request('file/xslt/download', post2)
                 return file
