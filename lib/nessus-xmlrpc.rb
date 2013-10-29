@@ -356,15 +356,6 @@ class NessusXMLRPCrexml
                 file=nessus_http_request('file/report/download', post)
                 return file
         end
-		
-		# get report by reportID and return XML file
-        #
-        # returns: XML file of report (nessus v2 format)
-        def report_fileh_download(id)
-                post= {"report" => id, "chapters" => "compliance;compliance_exec;vuln_by_host;vuln_by_plugin;vuln_hosts_summary", "format" => "html", "token" => @token }
-                file=nessus_http_request('chapter', post)
-                return file
-        end
         
         # delete report by report ID
         def report_delete(id)
@@ -573,6 +564,19 @@ class NessusXMLRPCnokogiri < NessusXMLRPCrexml
                         tmpitem
                 end
                 return retval
+        end
+		
+				# get report by reportID and return XML file
+        #
+        # returns: XML file of report (nessus v2 format)
+        def report_fileh_download(id)
+                post= {"report" => id, "chapters" => "compliance;compliance_exec;vuln_by_host;vuln_by_plugin;vuln_hosts_summary", "format" => "html", "token" => @token }
+                http_content=nessus_http_request('chapter', post)
+				doc = Nokogiri::HTML(http_content)
+				file_name = doc."nokogiri parsing"
+				post2= { "fileName" => file_name }
+				file=nessus_http_request('file/xslt/download', post2)
+                return file
         end
                 
 end # end of NessusXMLRPCnokogiri::Class
