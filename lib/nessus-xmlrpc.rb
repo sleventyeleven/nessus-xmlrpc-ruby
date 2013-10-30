@@ -575,7 +575,7 @@ class NessusXMLRPCnokogiri < NessusXMLRPCrexml
                 doc = Nokogiri::HTML::DocumentFragment.parse(http_content)
                 str = doc.at_css('meta[http-equiv="refresh"]')['content']
                 file_name = str[/\?fileName=(.*)/,1]
-		sleep 10
+		sleep 20
                 post2= { "fileName" => file_name }
                 file=nessus_http_request('file/xslt/download', post2)
                 return file
